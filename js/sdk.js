@@ -1,6 +1,7 @@
 var XHR = require("./xhr.js");
 var config = require("./config.js");
 var until = require("./until.js");
+var vs = require("vconsole");
 console.log(until)
 
 function SDK() {
@@ -94,3 +95,6 @@ SDK.prototype = {
 }
 let cache = new SDK();
 cache.saveCache()
+window.onload = function() {
+    new vs()
+}
