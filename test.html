@@ -7,7 +7,9 @@
             console.log(msg);
             alert(msg);
         }
-
+        if (indexedDB) {
+            alert("zhici")
+        }
         var limit;
 
         var half = '1'; //这里会换成中文再跑一遍
@@ -21,7 +23,6 @@
                 localStorage.setItem('cache', str);
                 half = str;
             } catch (ex) {
-                alert(half.length)
                 break;
             }
         }
