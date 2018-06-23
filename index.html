@@ -5,14 +5,187 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="./dist/index.js"></script>
+    <!-- <script src="./dist/index.js"></script> -->
     <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .bottom,
+        .top {
+            width: 175px;
+            height: 175px;
+            background: red;
+            border-radius: 175px 0px 0px 0;
+            overflow: hidden;
+        }
+        
+        .top {
+            background: blue;
+            transform-origin: bottom right;
+            transform: rotate(30deg);
+            border: 1px solid green;
+        }
+        
+        .wraper {
+            height: 350px;
+            width: 350px;
+            position: absolute;
+            transform: rotate(30deg);
+            transition: all 1s ease-in-out
+        }
+        
+        .bottom {
+            position: absolute;
+        }
+        
+        .b1 {
+            /* z-index: 1 */
+        }
+        
+        .b2 {
+            transform: rotateY(180deg) rotate(0deg);
+            transform-origin: bottom right;
+            /* z-index: 2 */
+        }
+        
+        .b2 .top {
+            background: yellow
+        }
+        
+        .b3 {
+            transform: rotateY(180deg) rotate(-60deg);
+            transform-origin: bottom right;
+            /* z-index: 3 */
+        }
+        
+        .b3 .top {
+            background: #1F1F06
+        }
+        
+        .b4 {
+            transform: rotateY(180deg) rotate(-120deg);
+            transform-origin: bottom right;
+            /* z-index: 4 */
+        }
+        
+        .b4 .top {
+            background: #60148B
+        }
+        
+        .b5 {
+            transform: rotateY(180deg) rotate(-180deg);
+            transform-origin: bottom right;
+            /* z-index: 5 */
+        }
+        
+        .b5 .top {
+            background: #AFCFAE
+        }
+        
+        .b6 {
+            transform: rotateY(180deg) rotate(-240deg);
+            transform-origin: bottom right;
+            /* z-index: 6; */
+            background: transparent;
+        }
+        
+        .b6 .top {
+            background: #14CC0E
+        }
+        
+        span {
+            position: absolute;
+            z-index: 4;
+            display: block;
+            height: 60px;
+            width: 60px;
+            background: rebeccapurple;
+            /* transform: rotate(-30deg) */
+            margin-left: 76px;
+            /* margin-left: 60px; */
+            margin-top: -141px;
+            text-align: center;
+            line-height: 60px;
+            transform: rotate(-30deg);
+        }
+        
+        .bottom:not(.b1) span {
+            transform: rotateY(180deg) rotate(30deg);
+        }
+    </style>
 </head>
 
 <body>
+    <div class="wraper">
+        <div class="bottom b1">
+            <div class="top"></div>
+            <span>一定将</span>
+        </div>
+        <div class="bottom b2">
+            <div class="top"></div>
+            <span>一定将</span>
+
+        </div>
+        <div class="bottom b3">
+            <div class="top"></div>
+            <span>一定将</span>
+
+        </div>
+        <div class="bottom b4">
+            <div class="top"></div>
+            <span>一定将</span>
+
+        </div>
+
+        <div class="bottom b5">
+            <div class="top"></div>
+            <span>一定将</span>
+
+        </div>
+        <div class="bottom b6">
+            <div class="top"></div>
+            <span>一定将</span>
+
+        </div>
+    </div>
+
+    <button>点击抽奖</button>
 
 </body>
 <script>
+    let wraper = document.getElementsByClassName('wraper')[0];
+    let button = document.getElementsByTagName('button')[0];
+    var i = 0;
+    var base = 20;
+    var clicktime = 0;
+    var currentDeg = 0;
+    button.onclick = function() {
+            if (!base) {
+                alert("，诶机会")
+                return
+            }
+            if (Date.now() - clicktime <= 1000) {
+                console.log("别点那么快")
+                return
+            }
+            let a = Math.ceil((Math.random() + 20 - base) * 1000);
+            console.log(a)
+            setTimeout(() => {
+                    wraper.style.cssText = `transform: rotate(${a}deg);`
+
+                }, 20)
+                // requestAnimationFrame(() => {
+                //     wraper.style.cssText = `will-change:transform;transform: rotate(${a}deg);`
+                // })
+            base--
+            clicktime = Date.now()
+        }
+        // wraper.addEventListener("transitionend", function() {
+        //     a = 0
+        // })
 </script>
 
 </html>
