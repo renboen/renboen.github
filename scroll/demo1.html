@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html,
+        body {
+            height: 100%;
+            width: 100%
+        }
+        
+        header {
+            height: 44px;
+            width: 100%;
+            background: red;
+            position: relative;
+            top: 0px;
+            z-index: 1
+        }
+        
+        #app {
+            height: calc(100% - 44px);
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mask {
+            height: 200px;
+            width: 100%;
+            position: fixed;
+            z-index: 4;
+            top: 44px;
+            background: yellow
+        }
+        
+        ul {
+            height: calc(100%);
+            width: 100%;
+            position: relative;
+            z-index: 6;
+            top: 200px;
+            /* overflow: hidden; */
+            border: 1px solid blue;
+        }
+        
+        li {
+            height: 400px;
+            width: 100%;
+            position: relative;
+            background: red;
+        }
+        
+        #wraper {
+            will-change: transform;
+        }
+    </style>
+</head>
+
+<body>
+    <header>header</header>
+    <div id="app">
+        <div class="mask">mask</div>
+        window.onload = function() { let app = document.getElementById("app"); let ul = document.getElementById("ul"); let wraper = document.getElementById("wraper"); let touch = { startY: 0, endY: 0, distance: 0 }; let distance; app.ontouchstart = function(e)
+        { touch.startY = e.touches[0].pageY; // wraper.style.willChange = "transform" }; app.ontouchmove = function(e) { e.preventDefault(); let _end = e.touches[0].pageY; distance = _end - touch.startY + touch.distance; if (distance > 0) { distance =
+        0 } if (distance
+        <=- 708) { distance=- 708 } requestAnimationFrame(()=> { wraper.style.transform = `translate3d(0,${distance}px,0)`; }) }; app.ontouchend = function(e) { touch.distance = distance // wraper.style.willChange = "auto" }; document.querySelector("header").onclick = function() { let p = document.querySelector("#header").offsetTop;
+            console.log(p) } }
+            <ul id="ul">
+                <div id="wraper">
+                    <li>1</li>
+                    <li id="header">2</li>
+                    <li>3</li>
+                </div>
+
+            </ul>
+    </div>
+</body>
+<script>
+</script>
+
+</html>

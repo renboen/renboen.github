@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            text-align: center
+        }
+        
+        header {
+            height: 44px;
+            width: 100%;
+            background: red;
+        }
+        
+        #app {
+            height: calc(100% - 44px);
+            width: 100%;
+            overflow: scroll;
+        }
+        
+        .mask {
+            height: 200px;
+            width: 100%;
+            background: yellow;
+        }
+        
+        ul {
+            height: calc(100%);
+            width: 100%;
+        }
+        
+        li {
+            height: 400px;
+            width: 100%;
+            position: relative;
+            background: #298F29;
+        }
+        
+        .fix {
+            height: 44px;
+            width: 100%;
+            background: #6942B3;
+        }
+        
+        .all_wraper {
+            height: calc(100%)
+        }
+        
+        .fix_back {
+            display: none;
+            position: fixed;
+            top: 44px;
+            z-index: 3
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fix_back fix">fixed title</div>
+    <header>header</header>
+    <div id="app">
+        <div class="mask">mask</div>
+        <ul id="ul">
+            <div class="fix">fixed title</div>
+            <div class="all_wraper">
+                <div id="wraper">
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </div>
+            </div>
+        </ul>
+    </div>
+</body>
+<script>
+    //简单选择器方法
+    function $(selector) {
+        if (selector.substr(0, 1) === "#") {
+            return document.getElementById(selector.replace("#", ""))
+        }
+        if (selector.substr(0, 1) === ".") {
+            return document.getElementsByClassName(selector.replace(".", ""))
+        }
+    }
+    //requestAnimationFrame兼容性写法
+    function raf(callback) {
+        let predate = 0;
+        let timer;
+        if (requestAnimationFrame) {
+            return function() {
+                requestAnimationFrame(() => {
+                    callback && callback.apply(this, arguments)
+                })
+            }
+        } else {
+            return function() {
+                // clearTimeout(timer)
+                timer = setTimeout(() => {
+                    callback && callback.apply(this, arguments)
+                    predate = Date.now()
+                }, 20)
+            }
+        }
+    }
+    let kl = raf(function() {
+        let top = this.scrollTop;
+        if (top >= 200) {
+            $(".fix_back")[0].style.display = "block"
+        } else {
+            $(".fix_back")[0].style.display = "none"
+        }
+    })
+    window.onload = function() {
+        let fix = $(".fix")[0];
+        $("#app").addEventListener("scroll", function() {
+            kl.apply(this)
+        }, false)
+    }
+</script>
+
+</html>
