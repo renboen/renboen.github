@@ -8,6 +8,7 @@
 <br>xhr.js 为封装的ajax
 <br>until.js为工具函数
 <br>sdk.js为主要逻辑
+<<<<<<< HEAD
 
 <br>sdk.png为思维导图
 
@@ -16,3 +17,6 @@
 
 
 
+=======
+<br>sdk.png为思维导图
+>>>>>>> sdk_localstorage
