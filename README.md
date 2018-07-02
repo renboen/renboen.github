@@ -7,5 +7,5 @@
 <br>config.js为配置项，暴露了全量更新，局部更新的控制，以及是否开启缓存的开关；详细开注释；。
 <br>xhr.js 为封装的ajax
 <br>until.js为工具函数
-<br>sdk.js为主要逻辑
+<br>sdk.js为主要逻辑 
 <br>sdk.png为思维导图
