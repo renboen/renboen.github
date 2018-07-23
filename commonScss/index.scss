@@ -1,0 +1,15 @@
+@import './reset';
+@import './variable.scss';
+body,
+html {
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    background: $color-background;
+    color: $color-text;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+a {
+    -webkit-touch-callout: none;
+}

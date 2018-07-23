@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+        }
+        
+        .date {
+            width: 280px;
+            margin: 0 auto;
+        }
+        
+        .clearFix::after {
+            content: "";
+            height: 0;
+            visibility: hidden;
+            clear: both;
+            display: block;
+        }
+        
+        header {
+            width: 280px;
+            background: #ccc;
+            border-bottom: 1px solid gray;
+        }
+        
+        header>button,
+        header>span {
+            display: inline-block;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+        }
+        
+        header>button:nth-child(1) {
+            float: left;
+            width: 50px;
+        }
+        
+        header>button:nth-child(3) {
+            width: 50px;
+            float: right;
+        }
+        
+        span {
+            width: 180px;
+        }
+        
+        .content {
+            /* background: #444444 */
+        }
+        
+        table {
+            border-collapse: collapse;
+        }
+        
+        th,
+        tr {
+            text-align: center;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            padding: 0 2px;
+        }
+        
+        tbody>tr,
+        tbody td {
+            /* border: 1px solid red; */
+        }
+        
+        .active_date {
+            background: yellow;
+            outline: 1px solid red;
+        }
+        
+        input {
+            border: 1px solid red;
+        }
+        
+        .hide {
+            display: none
+        }
+        
+        .show {
+            display: block
+        }
+    </style>
+</head>
+
+<body>
+    <div class="date">
+        <header class="clearFix">
+            <button class="prve_btn">&lt</button>
+            <span class="date_detail">2017-6</span>
+            <button class="next_btn">&gt</button>
+        </header>
+        <div class="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>日</th>
+                        <th>一</th>
+                        <th>二</th>
+                        <th>三</th>
+                        <th>四</th>
+                        <th>五</th>
+                        <th>六</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                    </tr>
+
+                    <tr>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <input type="text" value="oo">
+</body>
+<script src="./index.js"></script>
+<script>
+    let b = new DatePicker();
+    b.init();
+    let prve_btn = document.querySelector(".prve_btn");
+    let next_btn = document.querySelector(".next_btn");
+
+    prve_btn.addEventListener("click", function() {
+        b.prve_click();
+        // b.header_show();
+        // b.body_show()
+
+    }, false)
+    next_btn.addEventListener("click", function() {
+        b.next_click();
+
+    }, false)
+
+    console.log(b.totalDaysOneMonth())
+        // window.onload = function() {
+        //     let now = new Date();
+        //     let now_year = now.getFullYear();
+        //     let now_mounth = now.getMonth() + 1;
+        //     let now_date = now.getDate();
+        //     let now_week = currentDay_isweek_num(now_year, now_mounth, now_date);
+        //     console.log(now_week)
+        //         //每年有31天的月份
+        //     let mouthdays_31 = [1, 3, 5, 7, 8, 10, 12];
+        //     //每年有30天的月份
+        //     let mouthdays_30 = [4, 6, 9, 11];
+        //     //每年有28或者29天的月份
+        //     let mouthdays_28or29 = [2];
+        //     let date = document.querySelector(".date");
+
+    //     let date_tbody = document.querySelector("tbody");
+    //     let date_detail = document.querySelector(".date_detail");
+    //     let prve_btn = document.querySelector(".prve_btn");
+    //     let next_btn = document.querySelector(".next_btn");
+    //     let date_td = document.querySelectorAll("td");
+    //     let input = document.querySelector("input");
+
+
+
+    //     //初始化显示
+    //     header_show(now_year, now_mounth, now_date);
+    //     body_show(now_year, now_mounth, now_date);
+    //     //初始化当天激活
+
+    //     let str = now_year + "-" + now_mounth + "-" + now_date;
+    //     console.log(str)
+    //     document.querySelector('[date="' + str + '"]').className = "active_date";
+
+    //     function header_show(year, mounth) {
+    //         date_detail.innerHTML = year + "-" + mounth
+    //     }
+
+    //     function body_show(year, mounth, date) {
+    //         let firstday_isweek_num = currentDay_isweek_numcurrentDay_isweek_num(year, mounth, 1);
+    //         console.log(firstday_isweek_num)
+    //         let currentD = currentDay_isweek_num(year, mounth, date);
+    //         console.log("object")
+    //             //31天的月份
+    //         if (mouthdays_31.indexOf(mounth) > -1) {
+    //             console.log(firstday_isweek_num)
+    //                 //去除每月一号之前的数据
+    //             for (var j = 0; j < firstday_isweek_num; j++) {
+    //                 date_td[j].innerHTML = "";
+    //                 // date_td[j].style.border = "none"
+    //                 date_td[j].removeAttribute("date")
+
+
+    //             }
+    //             //插入数据
+    //             for (var i = 1; i <= 31; i++) {
+    //                 date_td[firstday_isweek_num].innerHTML = i;
+    //                 let date = year + "-" + mounth + "-" + i;
+    //                 date_td[firstday_isweek_num].setAttribute("date", date)
+    //                     //解决当前日期激活状态，在点击下一月后会在相位置任然处于激活状态问题
+    //                 date_td[firstday_isweek_num].className = "";
+    //                 firstday_isweek_num++
+    //             }
+    //             console.log(firstday_isweek_num)
+    //                 //去除每月最后一天之后的数据
+    //             for (var j = firstday_isweek_num; j < 42; j++) {
+    //                 date_td[j].innerHTML = "";
+    //                 // date_td[j].style.border = "none"
+    //                 date_td[j].removeAttribute("date")
+
+    //             }
+    //         };
+    //         //30天的月份
+
+    //         if (mouthdays_30.indexOf(mounth) > -1) {
+    //             for (var j = 0; j < firstday_isweek_num; j++) {
+    //                 date_td[j].innerHTML = "";
+    //                 // date_td[j].style.border = "none"
+    //                 date_td[j].removeAttribute("date")
+
+
+    //             }
+
+    //             for (var i = 1; i <= 30; i++) {
+    //                 date_td[firstday_isweek_num].innerHTML = i;
+    //                 let date = year + "-" + mounth + "-" + i;
+    //                 //解决当前日期激活状态，在点击下一月后会在相位置任然处于激活状态问题
+    //                 date_td[firstday_isweek_num].className = "";
+    //                 date_td[firstday_isweek_num].setAttribute("date", date)
+
+    //                 firstday_isweek_num++
+    //                 console.log(firstday_isweek_num)
+    //             }
+    //             console.log(firstday_isweek_num)
+    //             for (var j = firstday_isweek_num; j < 42; j++) {
+    //                 date_td[j].innerHTML = "";
+    //                 // date_td[j].style.border = "none"
+    //                 date_td[j].removeAttribute("date")
+
+
+    //             }
+    //         };
+    //         //28天或者29天
+
+    //         if (mounth === 2) {
+    //             for (var j = 0; j < firstday_isweek_num; j++) {
+    //                 date_td[j].innerHTML = "";
+    //                 date_td[j].removeAttribute("date")
+    //                     // date_td[j].style.border = "none"
+
+    //             }
+    //             if (is_runnian(year)) {
+    //                 console.log("闰年");
+    //                 for (var i = 1; i <= 29; i++) {
+    //                     date_td[firstday_isweek_num].innerHTML = i;
+    //                     let date = year + "-" + mounth + "-" + i;
+    //                     //解决当前日期激活状态，在点击下一月后会在相位置任然处于激活状态问题
+    //                     date_td[firstday_isweek_num].className = "";
+    //                     date_td[firstday_isweek_num].setAttribute("date", date)
+    //                     firstday_isweek_num++
+    //                 }
+    //                 console.log(firstday_isweek_num)
+
+    //             } else {
+    //                 console.log("不是闰年")
+    //                 for (var i = 1; i <= 28; i++) {
+    //                     date_td[firstday_isweek_num].innerHTML = i;
+    //                     let date = year + "-" + mounth + "-" + i;
+    //                     //解决当前日期激活状态，在点击下一月后会在相位置任然处于激活状态问题
+    //                     date_td[firstday_isweek_num].className = "";
+    //                     date_td[firstday_isweek_num].setAttribute("date", date)
+    //                     firstday_isweek_num++
+    //                 }
+    //             };
+    //             for (var j = firstday_isweek_num; j < 42; j++) {
+    //                 date_td[j].innerHTML = "";
+    //                 date_td[j].removeAttribute("date")
+
+    //                 // date_td[j].style.border = "none"
+
+    //             }
+    //         }
+    //     }
+    //     //初始化显示当前年月
+    //     //判断是不是闰年
+    //     function is_runnian(year) {
+    //         return year % 4 === 0
+    //     }
+    //     //判断当前星期几
+    //     function currentDay_isweek_num(year, mounth, date) {
+    //         let now = new Date(year + "-" + mounth + "-" + date)
+    //         let now_week = now.getDay();
+    //         // if (now_week === 0) {
+    //         //     now_week = 7;
+    //         // }
+    //         return now_week
+    //     }
+
+    //     //判断每月一号是星期几
+    //     // function firstday_isweek_num(year, mounth) {
+    //     //     let currentDay = new Date(year, mounth, 1);
+
+    //     // }
+    //     //点击切换年月
+    //     prve_btn.onclick = function() {
+    //         let op = new Date()
+    //         now_mounth = now_mounth - 1;
+
+    //         if (now_mounth === 0) {
+    //             now_mounth = 12;
+    //             now_year--
+    //         };
+
+
+    //         header_show(now_year, now_mounth);
+    //         console.log(now_mounth + "-" + now_year)
+    //         body_show(now_year, now_mounth, 1)
+    //         let str = op.getFullYear() + "-" + (op.getMonth() + 1) + "-" + op.getDate();
+    //         if (now_mounth === op.getMonth() + 1 && now_year === op.getFullYear()) {
+    //             document.querySelector('[date="' + str + '"]').className = "active_date";
+    //         }
+    //     }
+    //     next_btn.onclick = function() {
+    //         let op = new Date()
+    //         now_mounth = now_mounth + 1;
+    //         if (now_mounth === 13) {
+    //             now_mounth = 1;
+    //             now_year++
+    //         };
+
+    //         console.log(now_mounth + "-" + now_year)
+    //         body_show(now_year, now_mounth, 1)
+
+    //         header_show(now_year, now_mounth)
+    //         let str = op.getFullYear() + "-" + (op.getMonth() + 1) + "-" + op.getDate();
+    //         if (now_mounth === op.getMonth() + 1 && now_year === op.getFullYear()) {
+    //             document.querySelector('[date="' + str + '"]').className = "active_date";
+
+    //         }
+    //     };
+    //     //事件代理
+    //     date_tbody.addEventListener("click", function(e) {
+    //         // if (e.target.innerHTML === "") {
+    //         //     return false
+    //         // }
+    //         let flg = e.target.getAttribute("date");
+    //         let active_ele = document.querySelector(".active_date");
+    //         if (flg) {
+    //             console.log(flg);
+    //             if (active_ele) {
+    //                 active_ele.className = ""
+    //             };
+    //             e.target.className = "active_date"
+    //             input.value = flg;
+    //             date.className = "date hide"
+    //         } else {
+    //             return false
+    //         }
+    //     }, false)
+
+    //     input.addEventListener("click", function() {
+    //         date.className = "date show"
+    //         input.value = "";
+    //     }, false)
+
+
+    // }
+</script>
+
+</html>

@@ -1,0 +1,8 @@
+@mixin prefixer($key, $value) {
+    // @each $var in (border, border-radius) {
+    @each $k in (-webkit, -o) {
+        #{$k}-#{$key}: #{$value};
+    }
+    #{$key}: #{$value};
+    // }
+}

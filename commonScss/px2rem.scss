@@ -1,0 +1,10 @@
+@charset 'utf-8';
+$basefontsize: 75;
+@function px2rem($width) {
+    @return $width/$basefontsize*1rem;
+}
+
+//basefontsize取75便于计算;
+//640==>64
+//320==>32
+//依次类推

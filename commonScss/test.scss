@@ -1,0 +1,20 @@
+    @import "./px2rem.scss";
+    @import "./remtovw.scss";
+    @import "./media-dpr.scss";
+    @import "./media-screen.scss";
+    @import "./border.scss";
+    @import "./prefixer.scss";
+    h1 {
+        height: px2rem(150)
+    }
+    
+    h2 {
+        height: rem2vw(2);
+        @include respond-for("small") {
+            background: red
+        }
+        @include respond-to("dpr3") {
+            background: red
+        }
+        @include prefixer(border, 50%)
+    }

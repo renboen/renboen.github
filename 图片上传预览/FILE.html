@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .content {
+            display: table;
+            border-collapse: collapse;
+            text-align: center
+        }
+        
+        .row {
+            display: table-row;
+            border: 1px solid #ccc;
+        }
+        
+        .cell {
+            display: table-cell;
+            padding: 4px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="file" id="file">
+    <!-- <img alt="we" id="img"> -->
+    <canvas id="canvas"></canvas>
+    <div id="app">
+        {{bool}}
+        <div class="content">
+            <div class="row" v-for="(items,x) in list">
+                <div class="cell" v-for="(item,y) in items" :style="st(item)">{{x}}=>{{y}}</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            list: []
+        },
+        computed: {
+            bool() {
+                return "false"
+            }
+        },
+        methods: {
+            st(item) {
+                return `background:rgba(${item[0]},${item[1]},${item[2]},${item[3]/255})`
+            }
+        }
+    })
+
+    let file = document.getElementById("file");
+    // let img = document.getElementById("img");
+    let canvas = document.getElementById("canvas");
+    file.addEventListener("change", onChange, false)
+    let img = new Image;
+
+    function onChange(event) {
+        var file = event.target.files[0];
+        var reader = new FileReader();
+        let res = []
+        let result = [];
+        vm.list = []
+        reader.onload = function(event) {
+            img.src = event.target.result;
+            let ctx = canvas.getContext("2d")
+            img.onload = function() {
+                canvas.height = img.height;
+                canvas.width = img.width;
+                ctx.drawImage(img, 0, 0);
+                let data = ctx.getImageData(0, 0, img.width, img.height).data
+                let len = data.length;
+                for (var i = 0; i < len; i += 4) {
+                    res.push([data[i], data[i + 1], data[i + 2], data[i + 3]]);
+                }
+
+                let reslen = res.length;
+                let twicelen = img.width;
+                for (let i = 0; i < 108; i++) {
+                    let timer = setTimeout(() => {
+                        for (let num = 0; num < 10 * twicelen; num += twicelen) {
+                            vm.list.push(res.splice(0, twicelen))
+                            if (num === 9 * twicelen) {
+                                clearTimeout(timer)
+                            }
+                        }
+                    }, 1000)
+                }
+            }
+        };
+        reader.readAsDataURL(file);
+    }
+
+
+
+
+
+
+
+    function hsv(R, G, B) {
+        let max = Math.max(R, G, B)
+        let min = Math.min(R, G, B)
+        if (max === min) {
+            H = 0;
+            S = 0;
+        } else {
+            if (R = max) {
+                H = (G - B) / (max - min)
+            }
+            if (G = max) {
+                H = 2 + (B - R) / (max - min)
+            }
+            if (B = max) {
+                H = 4 + (R - G) / (max - min)
+                console.log(1)
+            }
+            H = H * 60
+            if (H < 0) {
+                H = H + 360
+            }
+            S = (max - min) / max;
+        }
+        V = Number((max / 255).toFixed(4))
+        return [H, S, V]
+    }
+</script>
+
+</html>

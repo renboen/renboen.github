@@ -1,0 +1,14 @@
+@charset 'utf-8';
+$breakpoints-for-dpr: ( 'dpr3': (-webkit-min-device-pixel-ratio: 3), 'dpr2':(-webkit-min-device-pixel-ratio: 2));
+@mixin respond-to($breakpoint) {
+    $raw-query: map-get($breakpoints-for-dpr, $breakpoint);
+    @if $raw-query {
+        $query: if( type-of($raw-query)=='string', unquote($raw-query), inspect($raw-query));
+        @media #{$query} {
+            @content;
+        }
+    }
+    @else {
+        @error 'No value found for `#{$breakpoint}`. '+'Please make sure it is defined in `$breakpoints` map.';
+    }
+}

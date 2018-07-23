@@ -1,0 +1,14 @@
+@charset 'utf-8';
+$basedpr:(1, 2, 3);
+$border-lists:('top', 'bottom', 'left', 'right');
+@each $dpr in $basedpr {
+    $i: index($basedpr, $dpr);
+    [data-dpr="#{$dpr}"] .border1px {
+        border: 1/$dpr*1px solid #ccc
+    }
+    @each $border in $border-lists {
+        [data-dpr="#{$dpr}"] .border-#{$border} {
+            border-#{$border}: 1/$dpr*1px
+        }
+    }
+}
